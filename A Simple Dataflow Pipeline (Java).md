@@ -21,13 +21,43 @@ In this lab, you will learn how to write a simple Dataflow pipeline and run it b
 * ****Task 3**** Pipeline filtering
 * ****Task 4**** Execute the pipeline locally
 * ****Task 5**** Execute the pipeline on the cloud
+
 ### Setup of the Environment
 * Open the Google cloud SDK and type in
 
 ```markdown
 gcloud init 
 ```
-* Selete your account and your Project and Type **Y**
+* Selete your configuration as shown below
+```markdown
+Pick configuration to use:
+ [1] Re-initialize this configuration [default] with new settings
+ [2] Create a new configuration
+Please enter your numeric choice:
+```
+after that your network authentication will be in progress and you will be taken to sign-up your google  account online *ensure you have a good data connection*  
+```markdown
+Network diagnostic detects and fixes local network connection issues.
+Checking network connection...done.
+Reachability Check passed.
+Network diagnostic passed (1/1 checks passed).
+
+Choose the account you would like to use to perform operations for
+this configuration:
+[1] XXXXXX@gmail.com (your given account registed with google)
+[2] Log in with a new account
+Please enter your numeric choice:
+
+```
+after that select your project or create your project
+```
+Pick cloud project to use:
+ [1] aaaa-xxxx-123456 (assuming you have a project registered)
+ [2] Create a new project
+Please enter numeric choice or text value (must exactly match list
+item): (Number)
+```
+and follow the given instruction and type **Y** if required
 
 ##### OR
 You can list the active account name with this command:
@@ -50,6 +80,84 @@ You can list the project ID with this command:
 gcloud config list project
 ```
 
+
+### Task 1. Preparation
+Verify that the repository files are in Cloud Shell Editor
+1. Clone the repository from the Cloud Shell command line:
+```markdown 
+git clone https://github.com/GoogleCloudPlatform/training-data-analyst
+```
+2. You should see the **training-data-analyst** directory, when you type
+```markdown
+ls
+```
+***this automatically list the directories.***
+
+In the next steps you will verify that you have a Cloud Storage bucket
+
+3. gsutil is the command line for accessing and manipulating Cloud Storage from the
+command line. mb is the specific command for creating, or making, a bucket
+
+```markdown
+gsutil mb create
+```
+4. to verify your bucket have been created type in... ensure to replace this **<your unique bucket name (Project ID)**
+```markdown
+BUCKET="<your unique bucket name (Project ID)>"
+echo $BUCKET
+```
+the **echo** function **automatically displays your unique bucket name**
+
+5. Verify that the dataflow is enabled
+you can check this on [Dataflows](https://cloud.google.com/dataflow/docs/.) for more information
+6. If necessary, Enable the API.
+
+7. to view a list of all your dataflow jobs, type the following command into terminal
+```markdown
+     gcloud dataflow jobs list 
+```
+8. To view more information about your job
+  ```markdown
+  export JOBID=<X>
+  gcloud dataflow jobs describe $Jobid
+  ```
+
+### Task 2. Create a new Dataflow project 
+ The goal of this lab is to become familiar with the structure of a Dataflow project and learn how to execute a Dataflow pipeline. You will use the powerful build tool Maven to create a new Dataflow project.
+ 
+ 1. Return to the browser tab containing Cloud Shell. In Cloud Shell navigate to the directory for this lab:
+ 
+ ```markdown
+ cd ~/training-data-analyst/courses/data_analysis/lab2
+```
+2. Copy and paste the following Maven command:
+```markdown
+mvn archetype:generate \
+  -DarchetypeArtifactId=google-cloud-dataflow-java-archetypes-starter \
+  -DarchetypeGroupId=com.google.cloud.dataflow \
+  -DgroupId=com.example.pipelinesrus.newidea \
+  -DartifactId=newidea \
+  -Dversion="[1.0.0,2.0.0]" \
+  -DinteractiveMode=false
+```
+*  What directory has been created?
+
+*  What package has been created inside the 
+src directory?
+3. Examine the Maven command that was used to create the lab code:
+```mackdown
+cat ~/training-data-analyst/courses/data_analysis/lab2/create_mvn.sh
+```
+* What directory will get created?
+* What package will get created inside the src directory?
+
+### Task 3. Pipeline filtering
+1.  view the file with nano. Do not make any changes to the code.
+```markdown 
+cd ~/training-data-analyst/courses/data_analysis/lab2/javahelp/src/main/java/com/google/cloud/training/dataanalyst/javahelp/
+nano Grep.java
+```
+this command automatically directs you to
 ### Task 1. Preparation
 Verify that the repository files are in Cloud Shell Editor
 1. Clone the repository from the Cloud Shell command line:
@@ -134,12 +242,18 @@ this command automatically directs you to **/training-data-analyst/courses/data_
 There are three apply statements in the pipeline:
 
 >What does the first apply() do?
-What does the second apply() do?
-Where does its input come from?
-What does it do with this input?
-What does it write to its output?
-Where does the output go to?
-What does the third apply() do?
+
+>What does the second apply() do?
+
+>Where does its input come from?
+
+>What does it do with this input?
+
+>What does it write to its output?
+
+>Where does the output go to?
+
+>What does the third apply() do?
 
 ### Task 4. Execute the pipeline locally
 1.In your terminal paste the following Maven command:
@@ -237,3 +351,7 @@ cat output*
    * Writing a simple pipeline in Java
    * Executing the query on the local machine
    * Executing the query on the cloud
+
+***faithinGod***
+
+***Jesus***
